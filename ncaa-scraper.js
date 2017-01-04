@@ -6,16 +6,15 @@ function get(type, games){
   });
 }
 
-// copy the code below on the ESPN score page
 let gameNodes = document.querySelectorAll('.sb-score');
 let games = []
 gameNodes.forEach((game)=>{
   const awayTeam = game.querySelector('td.away .sb-team-short');
   const awayRank = game.querySelector('td.away .rank');
-  const awayScore = game.querySelector('td.away .total span');
+  const awayScore = game.querySelector('tr.away .total span');
   const homeTeam = game.querySelector('td.home .sb-team-short');
   const homeRank = game.querySelector('td.home .rank');
-  const homeScore = game.querySelector('td.home .total span');
+  const homeScore = game.querySelector('tr.home .total span');
   const time = game.querySelector('.time');
 
   games.push({
