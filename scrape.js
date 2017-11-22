@@ -1,5 +1,6 @@
 const axios = require('axios')
 const format = require('date-fns/format')
+const getTime = require('date-fns/get_time')
 
 const getTeam = (comp, homeAway) => comp.competitions[0].competitors.find(competitor => competitor.homeAway === homeAway)
 const isRanked = (team) => team.curatedRank.current !== 99 && team.curatedRank.current !== 0
@@ -23,11 +24,15 @@ const get = async (date) => {
         return highestRank(a) - highestRank(b)
       })
 
-    const sortedEvents = [
-      ...ranked, 
-      ...req.data.events.filter(event => {
+    const notRanked = req.data.events.filter(event => {
         return event.competitions[0].competitors.every(team => team.curatedRank.current === 99)
-      })
+      }).sort((a, b) => {
+        return getTime(a.competitions[0].startDate) - getTime(b.competitions[0].startDate)
+      });
+
+    const sortedEvents = [
+      ...ranked,
+      ...notRanked
     ]
 
     const scraped = sortedEvents.reduce((prev, curr) => {
@@ -35,13 +40,14 @@ const get = async (date) => {
       const home = getTeam(curr, 'home')
       const away = getTeam(curr, 'away')
       const date = format(new Date())
-      const time = comp.status.type.detail === 'Postponed' ? 'Postponed' : format(new Date(comp.startDate), 'h:mm A');
+      const time = comp.status.type.detail === 'Postponed' ? 'Postponed' : format(new Date(comp.startDate), 'h:mm A')
+      const final = comp.status.type.completed
       
-      return `${prev}\n ${time},${away.team.location},${away.score === '0' ? ' ' : away.score},${home.team.location},${home.score === '0' ? ' ' : home.score}`
+      return `${prev}\n ${time},${away.team.location},${away.score === '0' || !final ? '' : away.score},${home.team.location},${home.score === '0' || !final ? '' : home.score}`
     }, '');
     console.log(scraped)
   } catch (e) {
     console.log(e)
   }
 }
-get('20171123')
+get('20171121')
