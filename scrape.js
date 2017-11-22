@@ -2,6 +2,8 @@ const axios = require('axios')
 const format = require('date-fns/format')
 const getTime = require('date-fns/get_time')
 
+const dateArg = process.argv[2]
+
 const getTeam = (comp, homeAway) => comp.competitions[0].competitors.find(competitor => competitor.homeAway === homeAway)
 const isRanked = (team) => team.curatedRank.current !== 99 && team.curatedRank.current !== 0
 
@@ -50,4 +52,4 @@ const get = async (date) => {
     console.log(e)
   }
 }
-get('20171121')
+get(dateArg)
