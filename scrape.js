@@ -45,7 +45,7 @@ const get = async (date) => {
       const time = comp.status.type.detail === 'Postponed' ? 'Postponed' : format(new Date(comp.startDate), 'h:mm A')
       const final = comp.status.type.completed
       
-      return `${prev}\n ${time},${away.team.location},${away.score === '0' || !final ? '' : away.score},${home.team.location},${home.score === '0' || !final ? '' : home.score}`
+      return `${prev}\n ${time},${away.team.location},${away.score === '0' || !final ? ' ' : away.score},${home.team.location},${home.score === '0' || !final ? ' ' : home.score}`
     }, '');
     console.log(scraped)
   } catch (e) {
