@@ -1,6 +1,6 @@
 ## Node NCAA scraper
 
-Scrape and output game information for a given date.
+Scrape and output NCAA Mens Basketball information.
 
 ### How to use locally
 
@@ -12,12 +12,12 @@ cd ncaa-scraper-js
 npm i
 ```
 
-##### Scores - scrape.js
-```node scrape.js {date}```
+##### Scores - scores.js
+```node scores.js {date}```
 
 * `date` - date in YYYYMMDD format
 
-Example: `node scrape.js 20171122`
+Example: `node scores.js 20171122`
 
 This will output a comma separated list with the game info for the provided date.
 
