@@ -12,33 +12,51 @@ cd ncaa-scraper-js
 npm i
 ```
 
-##### Scores - scores.js
-```node scores.js {date}```
+---
 
-* `date` - date in YYYYMMDD format
+### Scores - scores.js
 
-Example: `node scores.js 20171122`
+Get games for either a single date or week of the season.
 
-This will output a comma separated list with the game info for the provided date.
+**Date scores**
+
+`--date`, `-d`: get games for a single date (YYYYMMDD format).
+
+Example: `node scores.js -d=20171122`
+
+**Week scores**
+
+`--week`, `-w`: get games for a given week of the season.
+
+Example: `node scores.js -w=14`
+
+The `scores.js` file will output a comma separated list to the console in the following form
 
 ```
-Time, Away Team, Away Score, Home Team, Home Score
+Date, Time, Away Team, Away Score, Home Team, Home Score
 ```
 
 * Games are ordered first by rank and then by start time.
 * Scores are only given in output if the game is final. Otherwise the score is left blank.
 
-##### AP Rankings - ranks.js
-`node ranks.js {week}`
+---
 
-* `week` - week number for ranking
+### AP Rankings - ranks.js
 
-Example: `node ranks.js 4`
+`--week`, `-w`: Get AP Rankings for either a week of the season.
 
-This will output a comma separated list in the following form
+Example: `node ranks.js -w=4`
+
+The `ranks.js` file will output a comma separated list to the console in the following form
 
 ```
 Team, Points, First Place Votes, Record, Previous
 ```
 
 * A new line gap separates top 25 teams from "Others receiving votes" teams
+
+---
+
+### To-Do
+
+* Make season adjustable in week scores request. Currently hard-coded to 2018.
