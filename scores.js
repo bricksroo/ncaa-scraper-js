@@ -93,12 +93,11 @@ const get = async () => {
           : format(new Date(comp.startDate), 'h:mm A')
       const final = comp.status.type.completed
       const isConference = curr.competitions[0].conferenceCompetition
+      const isNeutral = curr.competitions[0].neutralSite
 
-      return `${prev}\n ${date},${time},${away.team.location},${
-        away.score === '0' || !final ? ' ' : away.score
-      },${home.team.location},${
-        home.score === '0' || !final ? ' ' : home.score
-      },${isConference}`
+      // prettier-ignore
+      return `${prev}
+${date},${time},${away.team.location},${away.score === '0' || !final ? ' ' : away.score},${home.team.location},${home.score === '0' || !final ? ' ' : home.score},${isConference},${isNeutral}`
     }, '')
     console.log(scraped)
   } catch (e) {
