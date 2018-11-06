@@ -119,7 +119,7 @@ if (dateArg != null) {
 }
 
 if (weekArg != null) {
-  reqUrl = `http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard?lang=en&region=us&calendartype=blacklist&limit=500&dates=2018&tz=America/New_York&groups=50&week=${weekArg.toString()}`
+  reqUrl = `http://site.api.espn.com/apis/site/v2/sports/basketball/mens-college-basketball/scoreboard?lang=en&region=us&calendartype=blacklist&limit=500&dates=2019&tz=America/New_York&groups=50&week=${weekArg.toString()}`
 }
 
 get()
