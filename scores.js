@@ -86,7 +86,7 @@ const get = async () => {
       const comp = curr.competitions[0]
       const home = getTeam(curr, 'home')
       const away = getTeam(curr, 'away')
-      const date = format(comp.startDate, 'ddd MMM D')
+      const date = format(comp.startDate, 'ddd, MMM D')
       const time =
         comp.status.type.detail === 'Postponed'
           ? 'Postponed'
