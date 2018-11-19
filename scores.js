@@ -1,10 +1,6 @@
 const axios = require('axios')
 const format = require('date-fns/format')
 const getTime = require('date-fns/get_time')
-const startOfDay = require('date-fns/start_of_day')
-const startOfWeek = require('date-fns/start_of_week')
-const endOfWeek = require('date-fns/end_of_week')
-const addDays = require('date-fns/add_days')
 const argv = require('minimist')(process.argv.slice(2))
 
 const getArg = (short, long) => {
@@ -95,9 +91,18 @@ const get = async () => {
       const isConference = curr.competitions[0].conferenceCompetition
       const isNeutral = curr.competitions[0].neutralSite
 
-      // prettier-ignore
-      return `${prev}
-${date},${time},${away.team.location},${away.score === '0' || !final ? ' ' : away.score},${home.team.location},${home.score === '0' || !final ? ' ' : home.score},${isConference},${isNeutral}`
+      const thisGame = [
+        date,
+        time,
+        away.team.location,
+        away.score === '0' || !final ? ' ' : away.score,
+        home.team.location,
+        home.score === '0' || !final ? ' ' : home.score,
+        isConference,
+        isNeutral,
+      ]
+
+      return `${prev}\n${thisGame.join('+')}`
     }, '')
     console.log(scraped)
   } catch (e) {
